@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { categories } from '../../Data/data';
 import {Link} from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
+
 // interface Data{
 //  _id:String,
 //  isAdmin:boolean

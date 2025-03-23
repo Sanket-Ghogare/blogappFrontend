@@ -6,7 +6,7 @@ const About = () => {
         <div className='relative   dark:bg-gray-800'  >
         
         <img
-          src="https://www.wallpapertip.com/wmimgs/23-236943_us-wallpaper-for-website.jpg"
+          src="https://t3.ftcdn.net/jpg/05/46/87/90/240_F_546879008_Q6ki464WT8YNuucGcKZZvOwyVnt5NaEy.jpg"
          
           className='w-full h-80'
           alt="image"

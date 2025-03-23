@@ -72,32 +72,37 @@ const Navbar = () => {
               <div className="flex flex-shrink-0 items-center">
                 <div className="h-8 w-auto">
                   <svg xmlns="http://www.w3.org/2000/svg" width={40} height={30} viewBox="0 0 512 512"><path fill="#1049ad" d="M192 32c0 17.7 14.3 32 32 32c123.7 0 224 100.3 224 224c0 17.7 14.3 32 32 32s32-14.3 32-32C512 128.9 383.1 0 224 0c-17.7 0-32 14.3-32 32zm0 96c0 17.7 14.3 32 32 32c70.7 0 128 57.3 128 128c0 17.7 14.3 32 32 32s32-14.3 32-32c0-106-86-192-192-192c-17.7 0-32 14.3-32 32zM96 144c0-26.5-21.5-48-48-48S0 117.5 0 144V368c0 79.5 64.5 144 144 144s144-64.5 144-144s-64.5-144-144-144H128v96h16c26.5 0 48 21.5 48 48s-21.5 48-48 48s-48-21.5-48-48V144z" /></svg>
+                  {/* <img
+    src="https://img.freepik.com/free-vector/floral-capital-letter-r-alphabet-vector_53876-87380.jpg?ga=GA1.1.1400772433.1736257455&semt=ais_hybrid"
+    alt="Logo"
+    className="h-10 w-auto"
+  /> */}
                 </div>
               </div>
               <div className="hidden  pl-20  sm:ml-6 sm:block">
                 <div className="flex space-x-6 pl-20 ml-20">
                   <Link
                     to="/home"
-                    className="text-black hover:bg-gray-300 hover:text-black rounded-md px-3 py-2 text-sm font-medium dark:text-white "
+                    className="text-black hover:bg-gray-600 hover:text-black rounded-md px-3 py-2 text-sm font-medium dark:text-white "
                     aria-current="page"
                   >
                     Home
                   </Link>
                   <Link
                     to="/about"
-                    className="text-black hover:bg-gray-300 hover:text-black rounded-md px-3 py-2 text-sm font-medium  dark:text-white"
+                    className="text-black hover:bg-gray-600 hover:text-black rounded-md px-3 py-2 text-sm font-medium  dark:text-white"
                   >
                     About
                   </Link>
                   <Link
                     to="/contact"
-                    className="text-black hover:bg-gray-300 hover:text-black rounded-md px-3 py-2 text-sm font-medium  dark:text-white"
+                    className="text-black hover:bg-gray-600 hover:text-black rounded-md px-3 py-2 text-sm font-medium  dark:text-white"
                   >
                     Contact
                   </Link>
                   <Link
                     to="/"
-                    className="text-black hover:bg-gray-300 hover:text-black rounded-md px-3 py-2 text-sm font-medium  dark:text-white"
+                    className="text-black hover:bg-gray-600 hover:text-black rounded-md px-3 py-2 text-sm font-medium  dark:text-white"
                   >
                     Logout
                   </Link>

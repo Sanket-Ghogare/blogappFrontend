@@ -193,7 +193,7 @@ const UpdateBlogPage: React.FC = () => {
 </div>
 <div>
         <form onSubmit={handleUpdate}>
-          <div className='flex w-full dark:bg-gray-800'>
+          <div className='flex w-full dark:bg-gray-800 '>
             <div className='mt-3 w-full flex dark:bg-gray-800' onClick={() => document.getElementById('file_input')?.click()}>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -207,7 +207,7 @@ const UpdateBlogPage: React.FC = () => {
             </button>
 
           </div>
-          <div className='pl-10 dark:bg-gray-800' >
+          <div className='pl-10 dark:bg-gray-800 dark:text-white text-black' >
             <input name="title " value={title} onChange={(e) => setTitle(e.target.value)} className='w-full mt-2 ml-1 outline-none text-2xl dark:bg-gray-800 dark:text-white' type="text" placeholder='Title' />
           </div>
           <div className='my-3 mx-6'>
