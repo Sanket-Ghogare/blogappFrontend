@@ -49,7 +49,7 @@ const HandleChange=(e:ChangeEvent<HTMLInputElement>)=>{
           password,
         })
       });
-      console.log("respose", response);
+      // console.log("respose", response);
       if (!response.ok) {
       
         throw new Error('Network response was not ok');

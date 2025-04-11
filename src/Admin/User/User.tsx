@@ -39,7 +39,7 @@ const Users:React.FC = () => {
           method:'DELETE',
         
       });
-      console.log(response);
+    //   console.log(response);
     
      
       }

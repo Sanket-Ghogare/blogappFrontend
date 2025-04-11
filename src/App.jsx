@@ -1,37 +1,3 @@
-// import React, {useState , useEffect} from 'react'
-// import Navbar from './components/Navbar/Navbar'
-// import { BrowserRouter as Router , Routes , Route , useLocation } from 'react-router-dom'
-// import Signup from './components/Signup/Signup'
-// import Home from './components/Home/Home'
-// import CreateBlog from './components/Create/CreateBlog/CreateBlog'
-// import BlogPage from './components/Create/BlogPage/BlogPage'
-// import UpdateBlog from './components/Create/UpdateBlog/UpdateBlog'
-// import About from './components/About/About'
-// import Contact from './components/Contact/Contact'
-// function App() {
-
-//   return (
-//     <>
-//   <Router>
-//   <Navbar/>
-//   <Routes>
-//     <Route path='/' element={<Home/>}/>
-//     <Route path='/Signup' element={<Signup/>}/>
-//     <Route path='/CreateBlog' element={<CreateBlog/>}/>
-//     <Route path='/categories/:id' element={<BlogPage/>}/>
-//     <Route path='/update/:id' element={<UpdateBlog/>}/>
-//     <Route path='/about' element={<About/>}/>
-//     <Route path='/contact' element={<Contact/>}/>
-
-//   </Routes>
-//   </Router>
-//     </>
-//   )
-// }
-
-// export default App
-
-
 import React, {useState , useEffect} from 'react'
 import Navbar from './components/Navbar/Navbar'
 import { BrowserRouter as Router , Routes , Route , useLocation, Navigate } from 'react-router-dom'
@@ -52,7 +18,10 @@ import Analytics from './Admin/Analytics';
 import { ThemeProvider} from './components/Context/theme'
 function MainContent() {
   const location = useLocation();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return localStorage.getItem("isLoggedIn") === "true";
+  });
+  
    
 
   const isAdmin = localStorage.getItem("isAdmin");
