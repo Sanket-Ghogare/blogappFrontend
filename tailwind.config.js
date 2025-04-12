@@ -7,6 +7,7 @@ export default {
   darkMode:"class",
   theme: {
     extend: {},
+    darkMode: 'class',
       screens: {
         'ss': {'min': '360px', 'max': '390px'},
         'xs':{'min': '390px', 'max': '400px'},

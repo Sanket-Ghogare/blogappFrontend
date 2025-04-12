@@ -8,7 +8,7 @@ const Calendercharts: React.FC = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await fetch('http://localhost:5000/api/getUsers');
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/getUsers`);
       if (response.ok) {
         const data=await response.json();
         setTotalUsers(data);
@@ -19,7 +19,7 @@ const Calendercharts: React.FC = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-        const response = await fetch('http://localhost:5000/api/blogs');
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/blogs`);
 
       if (response.ok) {
         const data=await response.json();
@@ -32,7 +32,7 @@ const Calendercharts: React.FC = () => {
 
   useEffect(() => {
     const fetchComment = async () => {
-        const response = await fetch('http://localhost:5000/api/comment/getcomment');
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/comment/getcomment`);
         if (response.ok) {
             const data=await response.json();
     

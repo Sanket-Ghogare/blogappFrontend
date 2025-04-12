@@ -34,7 +34,7 @@ const BlogPage: React.FC = () => {
     const fetchPost = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/category/${id}`
+          `${import.meta.env.VITE_BASE_URL}/api/category/${id}`
         );
         if (response.ok) {
           const postData = await response.json();
@@ -49,23 +49,27 @@ const BlogPage: React.FC = () => {
     };
 
     fetchPost();
+    fetchcomment();
   }, [id]);
 
   const Delete = async (postId: string) => {
     const accessToken = localStorage.getItem("accessToken");
 
-    const response = await fetch(`http://localhost:5000/api/delete/${postId}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_BASE_URL}/api/delete/${postId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
     navigate("/home");
   };
 
   const HandleComment = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    
+
     if (!newComment.trim()) {
       toast.error("Comment cannot be empty.");
       return;
@@ -74,7 +78,7 @@ const BlogPage: React.FC = () => {
       const username = localStorage.getItem("username");
 
       const response = await fetch(
-        "http://localhost:5000/api/comment/newcomment",
+        `${import.meta.env.VITE_BASE_URL}/api/comment/newcomment`,
         {
           method: "POST",
           headers: {
@@ -90,7 +94,7 @@ const BlogPage: React.FC = () => {
       if (!response.ok) {
         throw new Error("Network response was not good");
       }
-        
+
       setNewComment("");
       // console.log("Comment Posted");
       fetchcomment();
@@ -100,30 +104,29 @@ const BlogPage: React.FC = () => {
   };
 
   // useEffect(() => {
-    const fetchcomment = async () => {
-      try {
-        const response = await fetch(
-          "http://localhost:5000/api/comment/getcomment"
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch comment data");
-        }
-        const comment = await response.json();
-        setComments(
-          comment.filter((comment: Comment) => comment.postId === id)
-        );
-      } catch (error) {
-        console.error("Error fetching comment data:", error);
+  const fetchcomment = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/api/comment/getcomment`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch comment data");
       }
-    };
+      const comment = await response.json();
+      setComments(comment.filter((comment: Comment) => comment.postId === id));
+    } catch (error) {
+      console.error("Error fetching comment data:", error);
+    }
+  };
   //   fetchcomment();
   // }, []);
 
- 
   const DeleteComment = async (commentid: string) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/comment/deletecomment/${commentid}`,
+        `${
+          import.meta.env.VITE_BASE_URL
+        }/api/comment/deletecomment/${commentid}`,
         {
           method: "DELETE",
         }

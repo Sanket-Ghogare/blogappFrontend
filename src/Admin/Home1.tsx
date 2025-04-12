@@ -12,7 +12,7 @@ function Home1() {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const res = await fetch("http://localhost:5000/api/blogs");
+                const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/blogs`);
                 if (res.ok) {
                     const data = await res.json();
                     setTotalPost(data.length);
@@ -27,7 +27,7 @@ function Home1() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await fetch("http://localhost:5000/api/getUsers");
+                const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/getUsers`);
                 if (res.ok) {
                     const data = await res.json();
                     setTotalUsers(data.length);

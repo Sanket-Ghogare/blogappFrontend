@@ -14,6 +14,7 @@ interface Post {
   date: string;
   author: string;
 }
+
 const BlogCategory: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const { category } = useParams<{ category: string }>();
@@ -25,7 +26,7 @@ const BlogCategory: React.FC = () => {
   const fetchData = async () => {
     try {
       const accessToken = localStorage.getItem('accessToken');
-      const response = await fetch(`http://localhost:5000/api/searchcategory/${category}`, {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/searchcategory/${category}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -48,12 +49,19 @@ const BlogCategory: React.FC = () => {
         <div>
           <Category />
         </div>
-        <div className='sm:px-8 w-full'>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 ">
-          {posts.map(post => (
-            <PostCard key={post._id} post={post} />
-          ))}
-        </div>
+        <div className="sm:px-8 w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            {/* Show the "No data" message if there are no posts */}
+            {posts.length === 0 ? (
+              <div className="col-span-full text-center text-gray-600 dark:text-gray-300 mt-8">
+                This category has no data yet.
+              </div>
+            ) : (
+              posts.map((post) => (
+                <PostCard key={post._id} post={post} />
+              ))
+            )}
+          </div>
         </div>
       </div>
     </>

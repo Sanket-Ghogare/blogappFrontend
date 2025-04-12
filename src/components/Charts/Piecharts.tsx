@@ -15,7 +15,7 @@ const PieChart: React.FC = () => {
       try {
         const accessToken = localStorage.getItem('accessToken');
 
-        const res = await fetch("http://localhost:5000/api/getAnalytics", {
+        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/getAnalytics`, {
             method:'GET',
           headers: {
             Authorization: `Bearer ${accessToken}`,

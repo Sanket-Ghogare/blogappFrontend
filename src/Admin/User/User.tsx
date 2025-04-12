@@ -18,7 +18,7 @@ const Users:React.FC = () => {
     const [media , setMedia]=useState(window.innerWidth>400);
     useEffect(() => {
         const fetchUsers = async () => {
-            const response = await fetch('http://localhost:5000/api/blogs');
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/blogs`);
             if (response.ok) {
                 const post=await response.json();
                 setUsers(post);
@@ -35,7 +35,7 @@ const Users:React.FC = () => {
 
     const Delete=async(postId:string)=>{
     
-        const response=await fetch(`http://localhost:5000/api/deletepost/${postId}`,{
+        const response=await fetch(`${import.meta.env.VITE_BASE_URL}/api/deletepost/${postId}`,{
           method:'DELETE',
         
       });

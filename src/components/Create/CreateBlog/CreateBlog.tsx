@@ -66,7 +66,7 @@ const CreateBlog = () => {
 
     try {
       const accessToken = localStorage.getItem("accessToken");
-      const response = await fetch("http://localhost:5000/api/upload", {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/upload`, {
         method: "POST",
         body: formData,
         headers: {
@@ -117,12 +117,12 @@ const CreateBlog = () => {
         <form onSubmit={handleSubmit} className="dark:bg-gray-800">
           <div className="flex dark:bg-gray-800">
             <div
-              className="mt-3 flex border border-gray-300 sm:rounded-full ss:rounded-lg dark:bg-gray-800"
+           className="mt-3 flex items-center border border-gray-300 rounded-full px-4 py-1 cursor-pointer w-fit dark:bg-gray-800"
               onClick={() => document.getElementById("file_input")?.click()}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8 mt-1"
+                className="h-8 w-8 mt-1 text-black dark:text-white"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -134,7 +134,7 @@ const CreateBlog = () => {
                   d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                 />
               </svg>
-              <span className="text-sm text-gray-400 dark:bg-gray-800 mt-2">
+              <span className="text-sm text-gray-400 dark:bg-gray-800 mt-1">
                 Upload
               </span>
               <input
@@ -153,7 +153,7 @@ const CreateBlog = () => {
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="block w-64 h-10 border rounded-lg"
+              className="block w-64 dark:bg-gray-800 text-gray-400 h-10 border rounded-lg"
             >
               <option value="">Select Your Blog Category</option>
               {categories.map((category) => (

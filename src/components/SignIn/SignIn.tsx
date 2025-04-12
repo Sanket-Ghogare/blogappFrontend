@@ -5,28 +5,44 @@ import { useNavigate } from "react-router-dom";
 
 const SignIn = ({ onLogin }) => {
   const navigate = useNavigate();
-  const [fromData, setFromdata] = useState({
+  const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
   const HandleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFromdata({ ...fromData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const Signin = async (e: FormEvent) => {
     e.preventDefault();
-    const { email, password } = fromData;
+    const { email, password } = formData;
+    // Basic validations
+    if (!email || !password) {
+      toast.error("Email and Password are required");
+      return;
+    }
+
+    // Simple email format check
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Invalid email format");
+      return;
+    }
+
     try {
-      const response = await fetch("http://localhost:5000/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/api/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        }
+      );
       // console.log("respose", response);
 
       if (response.ok) {
@@ -36,15 +52,16 @@ const SignIn = ({ onLogin }) => {
         localStorage.setItem("username", data.username);
         localStorage.setItem("isLoggedIn", "true");
 
-        toast.success("user signup successfully");
+        toast.success("User signed in successfully!");
         onLogin();
         navigate("/home");
       } else {
-        throw new Error("Network response was not ok");
+        const errorData = await response.json();
+        toast.error(errorData.message || "Invalid email or password");
       }
     } catch (error) {
-      alert("invalid email or password");
-      toast.error("error while fetch the data");
+      console.error("Login error:", error);
+      toast.error("Connection error. Please try again.");
     }
   };
   return (
@@ -82,7 +99,7 @@ const SignIn = ({ onLogin }) => {
                         className="w-6 h-6 -ml-2"
                         fill="none"
                         stroke="currentColor"
-                        stroke-width="2"
+                        strokeWidth="2"
                         stroke-linecap="round"
                         stroke-linejoin="round"
                       >

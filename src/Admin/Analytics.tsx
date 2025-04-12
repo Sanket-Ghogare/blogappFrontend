@@ -11,7 +11,7 @@ const Analytics: React.FC = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await fetch('http://localhost:5000/api/getUsers');
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/getUsers`);
       if (response.ok) {
         const data=await response.json();
         setTotalUsers(data.length);
@@ -22,7 +22,7 @@ const Analytics: React.FC = () => {
 
   useEffect(() => {
     const fetchComment = async () => {
-        const response = await fetch('http://localhost:5000/api/comment/getcomment');
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/comment/getcomment`);
         if (response.ok) {
             const data=await response.json();
     
