@@ -89,119 +89,178 @@ const CreateBlog = () => {
   };
 
   return (
-    <div className="dark:bg-gray-800 dark:h-screen">
-      <div className="relative dark:bg-gray-800 ">
-        {file && file.type.startsWith("image/") ? (
-          <img
-            src={URL.createObjectURL(file)}
-            className="w-full sm:h-96 xxs:h-96 ss:h-64 xs:h-64 dark:bg-gray-800"
-            alt="image"
-          />
-        ) : file && file.type.startsWith("video/") ? (
-          <video
-            controls
-            className="w-full h-96 xxs:h-96 ss:h-64 xs:h-64 dark:bg-gray-800"
-          >
-            <source src={URL.createObjectURL(file)} type={file.type} />
-          </video>
-        ) : (
-          <img
-            src="https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"
-            className="sm:w-full sm:h-80 xxs:h-80 ss:h-64 xs:h-64 dark:bg-gray-800"
-            alt="image"
-          />
-        )}
-      </div>
-
-      <div>
-        <form onSubmit={handleSubmit} className="dark:bg-gray-800">
-          <div className="flex dark:bg-gray-800">
-            <div
-           className="mt-3 flex items-center border border-gray-300 rounded-full px-4 py-1 cursor-pointer w-fit dark:bg-gray-800"
-              onClick={() => document.getElementById("file_input")?.click()}
+    <div className="min-h-screen dark:bg-gray-800 bg-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        {/* Media Preview Section - Fully Responsive */}
+        <div className="relative w-full mb-6">
+          {file && file.type.startsWith("image/") ? (
+            <img
+              src={URL.createObjectURL(file)}
+              className="w-full max-w-2xl mx-auto h-64 sm:h-80 object-contain rounded-lg shadow-lg"
+              alt="Preview"
+            />
+          ) : file && file.type.startsWith("video/") ? (
+            <video
+              controls
+              className="w-full max-w-2xl mx-auto h-64 sm:h-80 rounded-lg shadow-lg"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8 mt-1 text-black dark:text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+              <source src={URL.createObjectURL(file)} type={file.type} />
+            </video>
+          ) : (
+            <img
+              src="https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"
+              className="w-full max-w-2xl mx-auto h-64 sm:h-80 object-cover rounded-lg shadow-lg opacity-50"
+              alt="Default preview"
+            />
+          )}
+          
+          {/* Upload Overlay - Show when no file is selected */}
+          {!file && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div 
+                className="bg-white bg-opacity-90 dark:bg-gray-900 dark:bg-opacity-90 rounded-full p-4 cursor-pointer hover:bg-opacity-100 transition-all duration-200 shadow-lg"
+                onClick={() => document.getElementById("file_input")?.click()}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-12 w-12 text-gray-600 dark:text-gray-300"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  />
+                </svg>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Form Section */}
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Upload Button and Category Selection */}
+          <div className="flex flex-col sm:flex-row gap-4 sm:items-start">
+            {/* Upload Button */}
+            <div className="flex-shrink-0">
+              <div
+                className="flex items-center gap-2 border border-gray-300 dark:border-gray-600 rounded-full px-4 py-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors bg-white dark:bg-gray-800"
+                onClick={() => document.getElementById("file_input")?.click()}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 text-gray-600 dark:text-gray-300"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  />
+                </svg>
+                <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                  {file ? 'Change Media' : 'Upload Media'}
+                </span>
+                <input
+                  className="hidden"
+                  id="file_input"
+                  type="file"
+                  accept="image/*,video/*"
+                  onChange={handleFileChange}
                 />
-              </svg>
-              <span className="text-sm text-gray-400 dark:bg-gray-800 mt-1">
-                Upload
-              </span>
-              <input
-                className="hidden"
-                id="file_input"
-                type="file"
-                onChange={handleFileChange}
-              />
+              </div>
+              {fileError && (
+                <p className="text-red-500 text-sm mt-2">{fileError}</p>
+              )}
+            </div>
+
+            {/* Category Selection */}
+            <div className="flex-1 sm:max-w-xs">
+              <select
+                value={category}
+                onChange={(e) => {
+                  setCategory(e.target.value);
+                  setCategoryError("");
+                }}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              >
+                <option value="">Select Blog Category</option>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.type}>
+                    {category.type}
+                  </option>
+                ))}
+              </select>
+              {categoryError && (
+                <p className="text-red-500 text-sm mt-2">{categoryError}</p>
+              )}
             </div>
           </div>
-          {fileError && (
-            <p className="text-red-500 text-sm mt-1">{fileError}</p>
-          )}
 
-          <div className="sm:ml-96 ss:ml-1 xs:ml-1 dark:bg-gray-800">
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              className="block w-64 dark:bg-gray-800 text-gray-400 h-10 border rounded-lg"
-            >
-              <option value="">Select Your Blog Category</option>
-              {categories.map((category) => (
-                <option key={category.id} value={category.type}>
-                  {category.type}
-                </option>
-              ))}
-            </select>
-            {categoryError && (
-              <p className="text-red-500 text-sm mt-1">{categoryError}</p>
-            )}
-          </div>
-
-          <div className="xxs:ml-10 sm:ml-10 ss:ml-8 xs:ml-8 mt-2 dark:bg-gray-800 bg-white">
+          {/* Title Input */}
+          <div>
             <input
               name="title"
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="w-full mt-2 ml-1 outline-none text-2xl dark:bg-gray-800 dark:text-white"
+              onChange={(e) => {
+                setTitle(e.target.value);
+                setTitleError("");
+              }}
+              className="w-full px-4 py-3 text-2xl sm:text-3xl font-semibold border-none outline-none bg-transparent placeholder-gray-400 dark:text-white text-gray-900 focus:ring-0"
               type="text"
-              placeholder="Title"
+              placeholder="Enter your blog title..."
             />
+            <div className="h-px bg-gray-200 dark:bg-gray-600 mt-2"></div>
             {titleError && (
-              <p className="text-red-500 text-sm mt-1 ml-10">{titleError}</p>
+              <p className="text-red-500 text-sm mt-2">{titleError}</p>
             )}
           </div>
 
-          <div className="my-3 ml-8 dark:bg-gray-800 dark:text-white text-black">
+          {/* Content Textarea */}
+          <div>
             <textarea
               name="content"
               value={content}
-              onChange={(e) => setContent(e.target.value)}
-              className="resize-none rounded-md p-2 w-full text-xl dark:bg-gray-800 dark:text-white text-black"
-              placeholder="Tell your story... "
-            ></textarea>
+              onChange={(e) => {
+                setContent(e.target.value);
+                setContentError("");
+              }}
+              className="w-full px-4 py-4 text-lg resize-none border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[200px] sm:min-h-[300px]"
+              placeholder="Tell your story..."
+            />
             {contentError && (
-              <p className="text-red-500 text-sm mt-1 ml-10">{contentError}</p>
+              <p className="text-red-500 text-sm mt-2">{contentError}</p>
             )}
           </div>
 
-          <button
-            type="submit"
-            className={`bg-blue-500 h-8 px-3 mt-5 text-white float-right mr-5 rounded-md uppercase ${
-              isLoading ? "opacity-50 pointer-events-none" : ""
-            }`}
-          >
-            {isLoading ? "Publishing..." : "Publish Blog"}
-          </button>
+          {/* Submit Button */}
+          <div className="flex justify-end pt-4">
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={`px-6 py-2 sm:px-8 sm:py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                isLoading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+            >
+              {isLoading ? (
+                <div className="flex items-center gap-2">
+                  <svg className="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Publishing...
+                </div>
+              ) : (
+                "Publish Blog"
+              )}
+            </button>
+          </div>
         </form>
       </div>
     </div>
